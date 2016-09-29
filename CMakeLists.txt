@@ -180,6 +180,7 @@ else ()
     # Unconditionally declare the following feature test macros.  These are
     # needed for some platforms (glibc and SunOS/illumos) and should be harmless
     # on the others.
+    message("finding shit")
     add_definitions (-D_GNU_SOURCE)
     add_definitions (-D_REENTRANT)
     add_definitions (-D_THREAD_SAFE)
@@ -199,6 +200,10 @@ else ()
     nn_check_lib (rt clock_gettime  NN_HAVE_CLOCK_GETTIME)
     nn_check_lib (rt sem_wait NN_HAVE_SEMAPHORE_RT)
     nn_check_lib (pthread sem_wait  NN_HAVE_SEMAPHORE_PTHREAD)
+    if (ANDROID)
+        set(NN_HAVE_SEMAPHORE_PTHREAD pthread)
+    endif()
+    message("finding shit ${NN_HAVE_SEMAPHORE_PTHREAD}")
     nn_check_lib (nsl gethostbyname NN_HAVE_LIBNSL)
     nn_check_lib (socket socket NN_HAVE_LIBSOCKET)
 
